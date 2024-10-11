@@ -10,6 +10,6 @@ namespace Core.Model
     {
         public  int DanhMucId { get; set; }
         public  string Name { get; set; }
-        public ICollection<DanhMucChiTiet> ChiTiets { get; set;}
+        
     }
 }

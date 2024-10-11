@@ -12,7 +12,6 @@ namespace Core.Model
         
         public string Name { get; set; }
         public int DanhMucId { get; set; }
-        public DanhMuc DanhMuc { get; set; }
-        public ICollection<Test> Tests { get; set; }
+       
     }
 }

@@ -15,8 +15,8 @@ namespace Core.Model
         public string CorrectAnswer { get; set; }
         public string CodeSnippetsDescription { get; set; }
         public string LANGUAGEVERSIONS { get; set; }
-
+       
         public int TestId { get; set; }
-        public Test Test { get; set; }
+       
     }
 }

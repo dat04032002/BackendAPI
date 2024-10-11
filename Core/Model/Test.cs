@@ -14,10 +14,10 @@ namespace Core.Model
         public int Time { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int DanhMucChiTietId { get; set; }
-        public DanhMucChiTiet DanhMucChiTiet { get; set; }
+        
+      
 
-        public ICollection<MultipleChoiceTest> MultipleChoiceTests { get; set; }
+      
 
     }
 }
