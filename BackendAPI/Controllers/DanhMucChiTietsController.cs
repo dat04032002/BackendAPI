@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BackendAPI.DataEnity;
 using Core.Model;
+using Core.ModelView;
+using System.Xml.Linq;
 
 namespace BackendAPI.Controllers
 {
@@ -15,7 +17,7 @@ namespace BackendAPI.Controllers
     public class DanhMucChiTietsController : ControllerBase
     {
         private readonly BackEndDbContext _context;
-
+     
         public DanhMucChiTietsController(BackEndDbContext context)
         {
             _context = context;
@@ -23,18 +25,37 @@ namespace BackendAPI.Controllers
 
         // GET: api/DanhMucChiTiets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DanhMucChiTiet>>> GetdanhMucChiTiets()
+        public async Task<ActionResult<List<DanhMucViewModel>>> GetdanhMucChiTiets()
         {
           if (_context.danhMucChiTiets == null)
           {
               return NotFound();
           }
-            return await _context.danhMucChiTiets.ToListAsync();
+            var datadanhMucChiTiets = _context.danhMucChiTiets.ToListAsync().Result;
+            var datadanhmuc=_context.danhMucs.ToListAsync().Result;
+           
+            if (datadanhMucChiTiets != null)
+            {
+                var data =( from c in datadanhmuc
+                           join d in datadanhMucChiTiets
+                           on c.DanhMucId equals d.DanhMucId
+                           select new DanhMucViewModel
+                           {
+                               DanhMucId=c.DanhMucId,
+                               LoaiName=c.Name,
+                               DanhMucChiTietId=d.DanhMucChiTietId,
+                               Name=d.Name,
+                               type= d.type==0?"Danh mục dev":"Danh mục nghiệp vụ"
+                           }).ToList();
+                return data;
+            }
+           
+            return new List<DanhMucViewModel>();
         }
 
         // GET: api/DanhMucChiTiets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DanhMucChiTiet>> GetDanhMucChiTiet(int id)
+        public async Task<ActionResult<DanhMucViewModel>> GetDanhMucChiTiet(int id)
         {
           if (_context.danhMucChiTiets == null)
           {
@@ -46,8 +67,24 @@ namespace BackendAPI.Controllers
             {
                 return NotFound();
             }
+          
+            var datadanhmuc = await _context.danhMucs.FindAsync(danhMucChiTiet.DanhMucChiTietId);
+            if (datadanhmuc == null)
+            {
+                return NotFound();
+            }
 
-            return danhMucChiTiet;
+            return new DanhMucViewModel
+            {
+                DanhMucId = danhMucChiTiet.DanhMucId,
+                LoaiName = datadanhmuc.Name,
+                DanhMucChiTietId = danhMucChiTiet.DanhMucChiTietId,
+                Name = danhMucChiTiet.Name,
+                type = danhMucChiTiet.type == 0 ? "Danh mục dev" : "Danh mục nghiệp vụ"
+            };
+              
+          
+         
         }
 
         // PUT: api/DanhMucChiTiets/5

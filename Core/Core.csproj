@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="IService\" />
-    <Folder Include="ModelView\" />
     <Folder Include="Service\" />
   </ItemGroup>
 

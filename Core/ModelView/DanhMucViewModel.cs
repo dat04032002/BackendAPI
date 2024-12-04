@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Model
+namespace Core.ModelView
 {
-    public class DanhMucChiTiet
+    public class DanhMucViewModel
     {
-        public int DanhMucChiTietId { get; set; }
-        
-        public string Name { get; set; }
-        public int type { get; set; }   
         public int DanhMucId { get; set; }
+        public string LoaiName { get; set; }
+        public int DanhMucChiTietId { get; set; }
+
+        public string Name { get; set; }
+        public string type { get; set; }
        
     }
 }

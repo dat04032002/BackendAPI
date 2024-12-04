@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Model
+namespace Core.ModelView
 {
-    public class MultipleChoiceTest
+    public class MultipleChoiceTestViewModel
     {
         public int MultipleChoiceTestId { get; set; }
         public string Question { get; set; }
@@ -15,9 +15,8 @@ namespace Core.Model
         public string PlanC { get; set; }
         public string PlanD { get; set; }
         public string CorrectAnswer { get; set; }
-        
-        public int TestId { get; set; }
        
-
+        public int TestId { get; set; }
+        public string TestName { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace Core.Model
         public string Password { get; set; }
         public DateTime Brithday { get; set; }
         public string Position { get; set; }
+        public string Role { get; set; }
     }
 }
